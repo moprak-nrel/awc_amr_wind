@@ -36,18 +36,17 @@ def main():
                 case_data[case]["time"], case_data[case][field], label=case, ls="solid"
             )
     with PdfPages(pfile) as pdf:
-        for field in fields:
-            plt.figure("power")
+        plt.figure("power")
+        plt.xlabel(r"Time $[s]$")
+        plt.ylabel(r"GenPwr $[MW]$")
+        plt.legend()
+        pdf.savefig()
+        for dim in ["x", "y", "z"]:
+            plt.figure(f"f_{dim}")
             plt.xlabel(r"Time $[s]$")
-            plt.ylabel(r"GenPwr $[MW]$")
+            plt.ylabel(f"Disk Force ${dim}$")
             plt.legend()
             pdf.savefig()
-            for dim in ["x", "y", "z"]:
-                plt.figure(f"f_{dim}")
-                plt.xlabel(r"Time $[s]$")
-                plt.ylabel(f"Disk Force ${dim}$")
-                plt.legend()
-                pdf.savefig()
 
 
 if __name__ == "__main__":
